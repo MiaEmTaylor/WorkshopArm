@@ -1,0 +1,12 @@
+yolo26n-pose.pt # the pose model for tracking arm movemnt and pose (x,y cords for this)
+implement filtering (e.g., Kalmann filter) for smoother robot movement.
+
+
+my naming system
+
+shoulder(can rotate)
+elbow_base(bends 180 degrees)
+wist(rotates, 90 degreen in flexation, 
+    90 in extention, 90 for radial deviation )
+
+ Convert BGR frames to RGB for MediaPipe processing.
