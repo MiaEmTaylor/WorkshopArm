@@ -199,47 +199,11 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "floating": {
-    "id": "3d186a0776b57858",
-    "type": "floating",
-    "children": [
-      {
-        "id": "5a560a4ea3806f16",
-        "type": "window",
-        "children": [
-          {
-            "id": "eda9d2e41a0c8795",
-            "type": "tabs",
-            "children": [
-              {
-                "id": "78f81760fd137a36",
-                "type": "leaf",
-                "state": {
-                  "type": "excalidraw",
-                  "state": {
-                    "file": "Excalidraw/Digit Docking Mechanism.md"
-                  },
-                  "icon": "excalidraw-icon",
-                  "title": "Digit Docking Mechanism"
-                }
-              }
-            ]
-          }
-        ],
-        "direction": "vertical",
-        "x": 969,
-        "y": 312,
-        "width": 933,
-        "height": 750,
-        "maximize": false,
-        "zoom": 0
-      }
-    ]
-  },
-  "active": "5de2dec735af7613",
+  "active": "5c40f899d1f250ea",
   "lastOpenFiles": [
-    "Workshop Agent - Planning Documentation/Protocols/Digit Docking Protocol.md",
+    "Excalidraw/Digit Docking Mechanism.md",
     "Issues to solve.md",
+    "Workshop Agent - Planning Documentation/Protocols/Digit Docking Protocol.md",
     "Workshop Agent - Planning Documentation/Hardware Requirements.md",
     "Workshop Agent - Planning Documentation/Main Documentation.md",
     "STLP AND TSA PLANS.md",
@@ -252,7 +216,6 @@
     "Excalidraw/Drawing 2026-05-04 19.54.45.excalidraw.md",
     "Excalidraw/Drawing 2026-05-03 14.38.50.excalidraw.md",
     "Excalidraw/Digit Heads.md",
-    "Excalidraw/Digit Docking Mechanism.md",
     "Excalidraw/Bayonet Locking Mechanism.md",
     "29b5f40c-ca98-419d-9f3c-a8f2ca5eff32.png",
     "rotary magazine..md",
