@@ -1,91 +1,111 @@
-"""
-Val OpenCV
-"""
-
 import cv2
-
-cap = cv2.VideoCapture(0)
-
-while True:
-    ret, frame = cap.read()
-    cv2.imshow("frame", frame)
-
-    if cv2.waitKey(1) == 27:
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-"""
-Val YOLO
-"""
-
+import os
+import torch
+import numpy
+import pybullet as p
+import pybullet_data
+import time
 from ultralytics import YOLO
 
-# Load a model
-model = YOLO("yolo26n-pose.pt")  # load an official model
-model = YOLO("path/to/best.pt")  # load a custom model
+# --- 1. CONFIGURATION ---
+image_path = "test_image.png"
+video_path = "store-aisle-detection.mp4"
+output_image = "output_result.png"
+output_video = "output_detected_video.mp4"
 
-# Validate the model
-metrics = model.val()  # no arguments needed, dataset and settings remembered
-metrics.box.map  # map50-95
-metrics.box.map50  # map50
-metrics.box.map75  # map75
-metrics.box.maps  # a list containing mAP50-95 for each category
-metrics.box.image_metrics  # per-image metrics dictionary for box with precision, recall, F1, TP, FP, and FN
-metrics.pose.map  # map50-95(P)
-metrics.pose.map50  # map50(P)
-metrics.pose.map75  # map75(P)
-metrics.pose.maps  # a list containing mAP50-95(P) for each category
-metrics.pose.image_metrics  # per-image metrics dictionary for pose with precision, recall, F1, TP, FP, and FN
+print("--- Starting Environment Validation ---")
+model = YOLO("yolo11n.pt") 
 
-"""
-Val numpy
-"""
-import numpy
-numpy.test()
+# --- 2. IMAGE DETECTION & SAVE ---
+if os.path.exists(image_path):
+    print("\n--- Processing Image ---")
+    img_results = model(image_path)[0]
+    img_results.save(filename=output_image)
+    print(f"SUCCESS: Image saved to {output_image}")
+else:
+    print(f"SKIP: '{image_path}' not found.")
 
+# --- 3. VIDEO DETECTION & SAVE ---
+if os.path.exists(video_path):
+    print("\n--- Processing Video ---")
+    cap = cv2.VideoCapture(video_path)
+    
+    # Get video properties for the saver
+    frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+    frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    fps = int(cap.get(cv2.CAP_PROP_FPS))
+    
+    # Initialize VideoWriter (FourCC 'mp4v' is standard for .mp4)
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+    out = cv2.VideoWriter(output_video, fourcc, fps, (frame_width, frame_height))
 
+    while cap.isOpened():
+        success, frame = cap.read()
+        if not success:
+            break
 
-"""
-Val pybullet
-"""
-import pybullet as p
-import time
-import pybullet_data
+        # Run detection (stream=True saves memory)
+        results = model(frame, stream=True)
+        
+        for r in results:
+            annotated_frame = r.plot()
+            
+            # Write frame to the output file
+            out.write(annotated_frame)
+            
+            # Show live preview
+            cv2.imshow("Processing Video...", annotated_frame)
 
-# 1. Connect to PyBullet (GUI mode shows a window, DIRECT mode does not)
-physicsClient = p.connect(p.GUI)
+        if cv2.waitKey(1) & 0xFF == ord("q"):
+            break
 
-# 2. Add search path for URDF files (like planes and robots)
-p.setAdditionalSearchPath(pybullet_data.getDataPath())
+    cap.release()
+    out.release()
+    cv2.destroyAllWindows()
+    print(f"SUCCESS: Video saved to {output_video}")
+else:
+    print(f"SKIP: '{video_path}' not found.")
 
-# 3. Set gravity
-p.setGravity(0, 0, -9.81)
+# --- 4. VAL PYTORCH & CUDA ---
+print("\n--- Val PyTorch ---")
+print(f"CUDA Available: {torch.cuda.is_available()}")
 
-# 4. Load a floor plane and a robot
-planeId = p.loadURDF("plane.urdf")
-startPos = [0, 0, 1]
-startOrientation = p.getQuaternionFromEuler([0, 0, 0])
-boxId = p.loadURDF("r2d2.urdf", startPos, startOrientation)
+# --- 5. VAL PYBULLET (Simulation) ---
+print("\n--- Val PyBullet ---")
+try:
+    p.connect(p.GUI)
+    p.setAdditionalSearchPath(pybullet_data.getDataPath())
+    p.loadURDF("plane.urdf")
+    p.loadURDF("r2d2.urdf", [0, 0, 1])
+    for _ in range(60): 
+        p.stepSimulation()
+    p.disconnect()
+    print("PyBullet simulation successful.")
+except Exception as e:
+    print(f"PyBullet failed: {e}")
 
-# 5. Run simulation loop
-for i in range(10000):
-    p.stepSimulation()
-    time.sleep(1./240.) # 240 Hz
+print("\nAll tests finished! Check your folder for outputs.")
 
-# 6. Disconnect
-p.disconnect()
+# --- 3. VAL PYTORCH ---
+print("\n--- Val PyTorch ---")
+print(f"CUDA Available: {torch.cuda.is_available()}")
 
+# --- 4. VAL PYBULLET ---
+print("\n--- Val PyBullet (Simulation) ---")
+try:
+    p.connect(p.GUI)
+    p.setAdditionalSearchPath(pybullet_data.getDataPath())
+    p.loadURDF("plane.urdf")
+    p.loadURDF("r2d2.urdf", [0, 0, 1])
+    for _ in range(60): 
+        p.stepSimulation()
+    p.disconnect()
+    print("PyBullet simulation successful.")
+except Exception as e:
+    print(f"PyBullet failed: {e}")
 
-"""
-Val PyTorch
-"""
-import torch
-x = torch.rand(5, 3)
-print(x)
+# --- 5. VAL NUMPY ---
+print("\n--- Val NumPy ---")
+print(f"NumPy Version: {numpy.__version__}")
 
-print(torch.cuda.is_available())
-
-if torch.cuda.is_available():
-    print(torch.cuda.get_device_name(0))
+print("\nAll tests finished!")

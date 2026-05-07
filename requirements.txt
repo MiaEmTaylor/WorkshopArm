@@ -2,7 +2,7 @@ ultralytics    # to train YOLO tool
 opencv-python  # OpenCV, the CV base model
 numpy          # numbers cruncher
 pybullet       # visualize / simulate arm
-pytorch        # more num crushers
-
+torch          # more num crushers
+requests       # dep for lots of those
 
 
