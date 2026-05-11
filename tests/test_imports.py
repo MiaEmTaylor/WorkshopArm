@@ -7,6 +7,9 @@ import pybullet_data
 import time
 from ultralytics import YOLO
 
+# --- 0. quick tests ---
+print(cv2.aruco.DICT_6X6_250)
+
 # --- 1. CONFIGURATION ---
 image_path = "test_image.png"
 video_path = "store-aisle-detection.mp4"
