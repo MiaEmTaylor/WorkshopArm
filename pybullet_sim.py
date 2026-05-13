@@ -14,15 +14,15 @@ class Testing():
         
     
 
-startPos = [0,0,1]
-startOrientation = p.getQuaternionFromEuler([0,0,0])
-boxId = p.loadURDF("r2d2.urdf",startPos, startOrientation)
+# startPos = [0,0,1]
+# startOrientation = p.getQuaternionFromEuler([0,0,0])
+# boxId = p.loadURDF("r2d2.urdf",startPos, startOrientation)
 #set the center of mass frame (loadURDF sets base link frame)
-startPos/Ornp.resetBasePositionAndOrientation(boxId, startPos,
-startOrientation)
-for i in range (10000):
-    p.stepSimulation()
-    time.sleep(1./240.)
-cubePos, cubeOrn = p.getBasePositionAndOrientation(boxId)
-print(cubePos,cubeOrn)
-p.disconnect()
+# startPos/Ornp.resetBasePositionAndOrientation(boxId, startPos,
+#startOrientation)
+#for i in range (10000):
+ #   p.stepSimulation()
+ #   time.sleep(1./240.)
+#cubePos, cubeOrn = p.getBasePositionAndOrientation(boxId)
+#print(cubePos,cubeOrn)
+#p.disconnect()

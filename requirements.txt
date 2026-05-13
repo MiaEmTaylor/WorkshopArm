@@ -1,8 +1,6 @@
-ultralytics    # to train YOLO tool
-opencv-python  # OpenCV, the CV base model
-numpy          # numbers cruncher
-pybullet       # visualize / simulate arm
-torch          # more num crushers
-requests       # dep for lots of those
-
-
+ultralytics            # to train YOLO tool
+numpy                  # numbers cruncher
+pybullet               # visualize / simulate arm
+torch                  # more num crushers
+requests               # dep for lots of those
+opencv-contrib-python  # library for ArUco markers
