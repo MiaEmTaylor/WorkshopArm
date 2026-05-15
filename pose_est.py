@@ -5,11 +5,13 @@ import numpy as np
 # ------- DICTIONARY -----------------------------------------------------
 # telling ArUco which set of marker patterns to look for
 dictionary = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
+parameters = cv2.aruco.DetectorParameters_create()  # Marker detection parameters
 J0, J1, J2, J3 = 0, 1, 2, 3 # redefining marker ids bc i will get confused.
 
 # ------- VARS ------------------------------------------------------------
 # each joint needs the ID it is connected to
 connections = [(J0, J1), (J1, J2), (J2, J3)]
+
 
 # ------- DETECTING AND LEBLING MARKERS -----------------------------------
 # open the webcam
@@ -20,11 +22,16 @@ if not live.isOpened:
 
 while True: # capturing live frames
     success, frame = live.read()
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # grayscale
     
     if not success:
         print("Error: Frames not captured.")
         break
-
+    
+    corners, ids, rejected_img_points = cv2.aruco.detectMarkers(gray, dictionary, 
+                                                            parameters=parameters, 
+                                                            cameraMatrix=matrix_coefficients, 
+                                                            distCoeff=distortion_coefficients)
 # dysplaying cv feed
     cv2.imshow('Live Feed', frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):  # <-- q to quit
