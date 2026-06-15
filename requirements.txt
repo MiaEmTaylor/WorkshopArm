@@ -1,6 +1,4 @@
-ultralytics            # to train YOLO tool
 numpy                  # numbers cruncher
-pybullet               # visualize / simulate arm
 torch                  # more num crushers
-requests               # dep for lots of those
+requests               # dep for lots of helpful things
 opencv-contrib-python  # library for ArUco markers

@@ -17,7 +17,7 @@
 **3. Level Project Comp - Biotechnological**
 
 *Biomedical/bio-engineering project is on hold until TSA themes are released — no solid idea yet since it needs to align with whatever the annual theme is. so...*
-## BAD ASS PLAN 💪🗣️🔥💃
+##  PLAN 💪🗣️🔥💃
 
 **1. ArchArm - Planning / Documentation**
 	 *Start building and documenting Aiden’s Arm over the summer before competition themes drop. build obsidian book. document everything before we started this so we've got a good start of docs.* 

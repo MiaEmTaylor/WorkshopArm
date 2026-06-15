@@ -15,8 +15,8 @@ with open('./calibration.json', 'r') as f:
 mtx = np.array(json_data['mtx'])
 dst = np.array(json_data['dist'])
 
-# Load and undistort image
-image = cv2.imread(r'.\snaps\IMG_20260527_095053.jpg')
+# Load and undistort image (kinda)
+image = cv2.imread('./snaps/IMG_20260527_095053.jpg')
 image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 h, w = image.shape[:2]
 newcameramtx, roi = cv2.getOptimalNewCameraMatrix(mtx, dst, (w,h), 1, (w,h))
@@ -44,11 +44,11 @@ if marker_ids is not None and len(marker_ids) > 0:
         if retval:
             print(f"tvec: {tvec}")
         else:
-            print("Pose estimation failed")
+            print("est failed")
     else:
         print("Not enough corners")
 else:
-    print("No markers detected")
+    print("No markers found")
 
 cv2.imshow("image", image)
 cv2.waitKey(0)

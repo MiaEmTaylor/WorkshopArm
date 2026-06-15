@@ -59,4 +59,4 @@ mtx, dist = get_calibration_parameters(img_dir='./snaps/')
 data = {"sensor": SENSOR, "lens": LENS, "mtx": mtx.tolist(), "dist": dist.tolist()}
 with open(OUTPUT_JSON, 'w') as json_file:
     json.dump(data, json_file, indent=4)
-print(f'Data has been saved to {OUTPUT_JSON}')
+print(f'Data saved to {OUTPUT_JSON}')
