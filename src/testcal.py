@@ -1,6 +1,9 @@
 import cv2
 import numpy as np
 import json
+from pathlib import Path
+
+DATA_DIR = Path(__file__).parent.parent / "data"
 
 # Config
 ARUCO_DICT = cv2.aruco.DICT_4X4_50
@@ -10,13 +13,13 @@ SQUARE_LENGTH = 0.0635
 MARKER_LENGTH = 0.0381
 
 # Load calibration
-with open('./calibration.json', 'r') as f:
+with open(DATA_DIR / 'calibration.json', 'r') as f:
     json_data = json.load(f)
 mtx = np.array(json_data['mtx'])
 dst = np.array(json_data['dist'])
 
 # Load and undistort image (kinda)
-image = cv2.imread('./snaps/IMG_20260527_095053.jpg')
+image = cv2.imread(str(DATA_DIR / 'calibration_snaps' / 'IMG_20260527_095053.jpg'))
 image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 h, w = image.shape[:2]
 newcameramtx, roi = cv2.getOptimalNewCameraMatrix(mtx, dst, (w,h), 1, (w,h))

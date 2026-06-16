@@ -2,6 +2,9 @@
 import cv2
 import numpy as np
 import json
+from pathlib import Path
+
+DATA_DIR = Path(__file__).parent.parent / "data"
 
 # ------- DICTIONARY -----------------------------------------------------
 # telling ArUco which set of marker patterns to look for
@@ -13,7 +16,7 @@ J0, J1, J2, J3 = 0, 1, 2, 3 # redefining marker ids bc i will get confused.
 # each joint needs the ID it is connected to
 connections = [(J0, J1), (J1, J2), (J2, J3)]
 
-with open('./calibration.json', 'r') as f:
+with open(DATA_DIR / 'calibration.json', 'r') as f:
     json_data = json.load(f)
 matrix_coefficients = np.array(json_data['mtx'])
 distortion_coefficients = np.array(json_data['dist'])
@@ -34,7 +37,7 @@ def vector_between_centers(start_center, end_center):
 
 # ------- DETECTING AND LEBLING MARKERS -----------------------------------
 # open the webcam
-live = cv2.VideoCapture(0) # NOTE: change to differnt number for other camera
+live = cv2.VideoCapture(1) # NOTE: change to differnt number for other camera
 if not live.isOpened:
     print("Error: No live feed. Try changing live to 1.")
     exit()

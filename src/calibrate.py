@@ -2,6 +2,9 @@ import cv2
 import numpy as np
 import os
 import json
+from pathlib import Path
+
+DATA_DIR = Path(__file__).parent.parent / "data"
 
 ARUCO_DICT = cv2.aruco.DICT_4X4_50
 SQUARES_VERTICALLY = 3
@@ -55,8 +58,9 @@ SENSOR = 'monochrome'
 LENS = 'kowa_f12mm_F1.8'
 OUTPUT_JSON = 'calibration.json'
 
-mtx, dist = get_calibration_parameters(img_dir='./snaps/')
+mtx, dist = get_calibration_parameters(img_dir=str(DATA_DIR / "calibration_snaps"))
 data = {"sensor": SENSOR, "lens": LENS, "mtx": mtx.tolist(), "dist": dist.tolist()}
-with open(OUTPUT_JSON, 'w') as json_file:
+output_path = DATA_DIR / OUTPUT_JSON
+with open(output_path, 'w') as json_file:
     json.dump(data, json_file, indent=4)
-print(f'Data saved to {OUTPUT_JSON}')
+print(f'Data saved to {output_path}')
