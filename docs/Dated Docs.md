@@ -32,3 +32,7 @@
 - Built a second, voice-enabled agent variant that listens, transcribes, and reasons about spoken content alongside facial readings
 - Reorganized the codebase into folders by role (apps/core/modeling/data/logs/assets) for maintainability
 - Reconciled two out-of-sync local copies of the project (one had newer drawings/docs, the other matched GitHub's reorganized structure), merged them into one, pushed to GitHub, and flattened the local folder path to `/home/mia_mousie/ARCHLOGIC/ArchArm`
+- Added motion.py, tracking how fast facial signals are changing over time, not just their static level
+- Added per-photo calibration diagnostics logging to trace category confusion back to specific images
+- Built a third "showcase" agent combining all the readings/agent reasoning for demoing
+- Wrote HOW_IT_WORKS.md documenting the full pipeline, and cut dated version-checkpoint branches on GitHub
