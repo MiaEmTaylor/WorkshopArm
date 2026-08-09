@@ -8,7 +8,6 @@ venv/
 env/
 
 # Generated files
-*.json
 *.log
 
 # IDE
@@ -21,5 +20,9 @@ env/
 .DS_Store
 Thumbs.db
 
-# Obsidian local settings (optional)
+# Obsidian local settings and installed plugin code (not authored content)
 .obsidian/workspace.json
+.obsidian/plugins/
+
+# Claude Code local session config
+.claude/
