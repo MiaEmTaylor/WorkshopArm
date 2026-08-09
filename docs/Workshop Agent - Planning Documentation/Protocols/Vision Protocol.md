@@ -1,4 +1,4 @@
-> Current status: Prototype complete — live CV tracking working. Planning arm movement control phase. See [[WorkshopArm CV Prototype Docs]] for full build notes.
+> Current status: Prototype stage. See [[WorkshopArm CV Prototype Docs]] for full build notes.
 
 ---
 
@@ -71,21 +71,3 @@ cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
 - `solvePnP` for 3D pose per marker
 - Kalman filtering for smooth servo-ready output
 - Serial/SSH data output to servos
-
----
-
-## Next Phase — Arm Movement Control
-
-### Goal
-Move J3 (arm tip) to track and touch ID4 (a free-placed target marker, not a joint).
-
-### Order of Operations
-
-1. **solvePnP** — get full 3D pose (tvec + rvec) for all joint markers. Must be stable before anything else.
-2. **Joint angles** — dot product method between 3D joint vectors. Define rotation axes per joint (J0=base rotate, J1=shoulder flex, J2=elbow flex, J3=wrist rotate+deviate). Already stubbed.
-3. **New marker setup** — print ID4+, expand dictionary, recalibrate, update `calibration.json`
-4. **Movement loop** — compute 3D error between J3 and ID4, map to servo targets via IK, send over serial (PySerial), repeat every frame
-5. **Kalman filter** — smooth output before it hits the Arduino
-
-### Arduino Side (planned)
-Receive target angles → drive servos → report back actual positions for confidence scoring.
