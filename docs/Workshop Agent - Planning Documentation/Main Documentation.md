@@ -6,6 +6,8 @@ Aiden needs a physical part. an arm. a workshop tool. an agent that handles ever
 Manages finger attachment swapping and tool configuration.
 ### Vision Protocol
 Computer vision pipeline — object detection, depth, grasp planning.
+### [[Facial Affect Protocol]]
+Reads a person's live emotional state from webcam video, calibrated per-person into a continuous valence/arousal score, fed to LLM agents that reason about it in real time. Standalone prototype, not yet integrated into ArchArm.
 ### Service Protocol
 Human interaction and command parsing. Heavier implementation than standard ArchLogic.
 ### Personality Protocol
