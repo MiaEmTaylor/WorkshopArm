@@ -31,3 +31,4 @@
 - Built and iterated on an AI agent experiment that reads live facial affect and reasons about how to move it toward a target state, including a self-scored prediction ledger and a suppressed-smile detector as a second success signal
 - Built a second, voice-enabled agent variant that listens, transcribes, and reasons about spoken content alongside facial readings
 - Reorganized the codebase into folders by role (apps/core/modeling/data/logs/assets) for maintainability
+- Reconciled two out-of-sync local copies of the project (one had newer drawings/docs, the other matched GitHub's reorganized structure), merged them into one, pushed to GitHub, and flattened the local folder path to `/home/mia_mousie/ARCHLOGIC/ArchArm`
