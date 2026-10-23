@@ -2,3 +2,6 @@ numpy                  # numbers cruncher
 torch                  # more num crushers
 requests               # dep for lots of helpful things
 opencv-contrib-python  # library for ArUco markers
+pyserial               # talks to the Arduino over serial
+openai                 # reasons about which gesture to perform
+python-dotenv          # loads OPENAI_API_KEY from facial_rec_prototype/.env
