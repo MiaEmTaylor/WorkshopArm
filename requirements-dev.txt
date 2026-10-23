@@ -1,0 +1,10 @@
+# KUBUNTU LAPTOP: python 3.13. runs the servo, keyboard, point and gesture
+# scripts. NOT the holistic ones: no mediapipe that still has mp.solutions
+# is built for python 3.13. for the brain laptop use requirements.txt.
+#   pip install -r requirements-dev.txt
+
+numpy>=2.1                     # numbers cruncher. 2.1 is the first with python 3.13 builds
+opencv-contrib-python==4.11.0.86  # camera + ArUco. same version as the brain laptop
+pyserial>=3.5                  # talks to the Arduino over serial
+openai>=1.0                    # reasons about which gesture to perform
+python-dotenv>=1.0             # loads OPENAI_API_KEY from facial_rec_prototype/.env

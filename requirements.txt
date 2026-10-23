@@ -1,6 +1,8 @@
-# python 3.11 (void's python3.11 package). install inside the venv:
+# BRAIN LAPTOP (the-cake-is-a-lie): python 3.11 on void, runs everything
+# including the holistic scripts. install inside the venv:
 #   pip install -r requirements.txt
-# exact pins = the versions running on the brain laptop.
+# numpy and opencv are pinned to what runs on the brain laptop. the rest
+# are ranges. for the kubuntu laptop (python 3.13) use requirements-dev.txt.
 
 mediapipe<0.10.30              # holistic tracking. 0.10.30+ removed mp.solutions
 numpy==1.26.4                  # numbers cruncher. mediapipe 0.10.21 needs numpy 1.x
