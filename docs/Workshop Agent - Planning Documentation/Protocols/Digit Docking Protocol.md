@@ -1,3 +1,5 @@
+> Current status: Concept + mechanism drawings. Not built yet. The middle finger is the swappable one.
+
 ### Mechanism
 **[[Digit Docking Mechanism]]**
 *I'm thinking we have Aiden be able to pull his arm up, stick a finger in the tool slot and it has a rotating wheel that applies whatever tool he assigns based on ID number. more attachments available for different needs*

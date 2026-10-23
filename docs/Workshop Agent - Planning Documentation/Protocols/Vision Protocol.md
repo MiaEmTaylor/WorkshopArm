@@ -1,73 +1,29 @@
-> Current status: Prototype stage. See [[WorkshopArm CV Prototype Docs]] for full build notes.
-
----
+> Current status: Planned. The old ArUco marker prototype is retired (history in [[WorkshopArm CV Prototype Docs]]).
 
 ## Overview
+Computer vision pipeline. Watches the people and the workspace. The arm's own joint positions come from the AS5600 encoders, not from cameras.
 
-The Vision Protocol handles the computer vision pipeline for WorkshopArm. In its current prototype form, it tracks the position of the arm's major joints in real time using ArUco fiducial markers and an OpenCV detection pipeline, producing a live overlay with joint centers and skeleton lines connecting them.
+## Cameras
+1. **Room/Person** — behind the arm, wide view of people (~15–20 FPS)
+2. **Workshop/Arm** — ~4 ft above the work area on the bar the arm hangs from, angled down at the arm and table (~10–15 FPS)
 
----
+Wrist camera = Future Improvement.
 
-## How It Works
+## Does
+- YOLO-pose on everyone (on Intel graphics via OpenVINO): position, distance, movement speed, safety
+- Tracker (ByteTrack) keeps person IDs between frames
+- MediaPipe Holistic on User 1's crop: face, hands, gaze
+- Holistic on bystanders now and then (rotating or triggered)
+- Mouth tracking for Echo Arch's speaker detection
 
-### Markers
-Four ArUco markers (DICT_4X4_50) are physically attached to the arm at each major joint. Each marker has a hardcoded ID mapped to a joint:
+## Attention cycle
+- Repeating cycle to find User 1 (the person the arm is focused on)
+- User 1 can change based on context
+- If unsure, attention splits between max 2 people
 
-| Marker ID | Joint |
-|-----------|-------|
-| 0 | J0 — Base |
-| 1 | J1 — Shoulder |
-| 2 | J2 — Elbow |
-| 3 | J3 — Wrist |
+## Talks to
+Signal Fusion, Facial Affect, Echo Arch, Handshake, Civil, Telemetry.
 
----
-
-### Pipeline
-
-1. **Capture** — Live feed pulled from webcam via OpenCV
-2. **Undistort** — Frame corrected using calibration data loaded from `calibration.json` (camera matrix + distortion coefficients)
-3. **Grayscale conversion** — Frame converted to grayscale for marker detection
-4. **Marker detection** — ArUco detector scans the frame and returns corner coordinates and IDs for any found markers
-5. **Center calculation** — Center point of each detected marker is computed by averaging its four corners
-6. **Overlay** — Detected markers are boxed and labeled, green dots drawn at each joint center
-7. **Skeleton drawing** — Lines drawn between connected joint centers following the chain: J0 → J1 → J2 → J3
-
----
-
-### Connections
-
-```python
-connections = [(J0, J1), (J1, J2), (J2, J3)]
-```
-
-If both endpoints of a connection are detected in the current frame, a line is drawn. If a marker drops out, that segment just doesn't render — nothing breaks.
-
----
-
-### Camera Calibration
-
-Calibration is handled separately via a ChArUco board calibration script. Output is saved to `calibration.json` and loaded at runtime. This corrects for lens distortion before detection runs.
-
-Required capture resolution:
-```python
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
-```
-
----
-
-## Current Limitations
-
-- Angle calculation between joints not yet implemented (dot product method, NumPy — stubbed in code)
-- `solvePnP` for full 3D rotation per marker not yet implemented — currently 2D center tracking only
-- No filtering applied to joint positions (Kalman filter planned for smoother output)
-- Camera index hardcoded — needs to be changed per machine
-
----
-
-## Planned (not built)
-
-- Joint angle output via dot product method
-- `solvePnP` for 3D pose per marker
-- Kalman filtering for smooth servo-ready output
-- Serial/SSH data output to servos
+## Open
+- Room/Person camera behind the arm may get blocked by the arm — test placement
+- Real speed on the laptop (`src/holistic_fps_test.py`)

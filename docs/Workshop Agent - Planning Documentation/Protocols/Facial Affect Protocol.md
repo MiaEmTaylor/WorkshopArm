@@ -1,4 +1,15 @@
-> Current status: Prototype stage — actively iterating. Lives in a separate repo (`facial_rec_prototype`, see `HOW_IT_WORKS.md` there for full build notes), not yet integrated into ArchArm.
+> Current status: Prototype stage — actively iterating. Lives in a separate repo (`facial_rec_prototype`, see `HOW_IT_WORKS.md` there for full build notes), not yet integrated into ArchArm. Integration plan decided (see below).
+
+---
+
+## Plan for the arm (decided Oct 2026)
+
+- Reads User 1's face from Vision's Room/Person camera
+- Outputs valence + arousal + confidence → [[Signal Fusion Protocol|Signal Fusion]]
+- **EmoNet for new people** (low confidence) → **personal calibration for known people** (high confidence), built up automatically from conversations over time (no photo session required)
+- Roles: comfort monitor (stress → slow down/back off), readiness check (waits for calm before handoffs), personality reactions, feedback signal for [[Learning Protocol|Learning]], mood context for [[GPT Protocol|GPT]]
+- The agent apps below stay as research/demos, not part of the arm
+- Code stays in its own repo for now (will be reformatted)
 
 ---
 
@@ -61,13 +72,12 @@ Three agent variants currently exist, all reading the same live valence/arousal 
 - EmoNet comparison runs at ~1fps on CPU, throttled to avoid dragging down the rest of the pipeline
 - Deception-signal heuristic has no scientific validation behind it — verbal/facial mismatch only, not a real lie detector
 - Trained regression model mixes trust levels: real OASIS-rated data (high trust) pooled with auto-labeled session data (low trust, noisier but higher volume)
-- Lip-reading is only at the feasibility-check stage (do recorded mouth shapes look consistent per-word?) — no model built yet
+- Lip-reading moved to its own repo (`unvoiced-service-protocol-add-in`)
 - Not integrated with ArchArm's kernel/protocol routing — runs standalone
 
 ---
 
 ## Planned (not built)
 
-- An actual lip-reading model, contingent on the feasibility check showing real signal
-- Multi-person calibration profiles
-- Integration point into a future Personality Protocol or Service Protocol, so ArchArm could consume this live affect signal instead of it only running as a standalone prototype
+- Per-person calibration built automatically through Handshake profiles
+- Integration into the arm through Signal Fusion (see Plan for the arm above)
