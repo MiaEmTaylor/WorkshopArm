@@ -1,7 +1,10 @@
-numpy                  # numbers cruncher
-torch                  # more num crushers
-requests               # dep for lots of helpful things
-opencv-contrib-python  # library for ArUco markers
-pyserial               # talks to the Arduino over serial
-openai                 # reasons about which gesture to perform
-python-dotenv          # loads OPENAI_API_KEY from facial_rec_prototype/.env
+# python 3.11 (void's python3.11 package). install inside the venv:
+#   pip install -r requirements.txt
+# exact pins = the versions running on the brain laptop.
+
+mediapipe<0.10.30              # holistic tracking. 0.10.30+ removed mp.solutions
+numpy==1.26.4                  # numbers cruncher. mediapipe 0.10.21 needs numpy 1.x
+opencv-contrib-python==4.11.0.86  # camera + ArUco. don't also install opencv-python, they clash
+pyserial>=3.5                  # talks to the Arduino over serial
+openai>=1.0                    # reasons about which gesture to perform
+python-dotenv>=1.0             # loads OPENAI_API_KEY from facial_rec_prototype/.env
