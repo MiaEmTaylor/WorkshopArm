@@ -213,3 +213,4 @@ time,setting,max_temp_c,avg_mhz,throttle_count,plugged_in,battery
 23:35:16,3-governor-performance,49,2100,0,1,46
 23:35:18,3-governor-performance,49,2100,0,1,46
 23:35:20,3-governor-performance,49,2100,0,1,46
+23:35:22,3-governor-performance,39,2100,0,1,46
