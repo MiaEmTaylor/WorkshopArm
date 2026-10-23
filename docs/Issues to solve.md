@@ -24,3 +24,13 @@ Option B: Custom Logic: Detect the 6th finger's position relative to the 5th fin
 **well need to compare both perceived location (from CV) of the joints to the servos enumerator returns to help it earn confidence score. well need to modify the models confidence classifier.**
 
 **need to look into how to make our own data set. if we need to make a data set later rather than before the final that's okay, we can get the basic tracking set up ad sending data to the servos over serial or ssh for basic wrist elbow and base rotation and movement. we may need to sacrifice cool looking sleek design for the placement stickers for tracking rotation. this could help training significantly**
+
+## Machine reads scary and unsafe rather than intimidating and charming
+Exaggerate the first 20% of a reach so the human knows where it's going.
+CV-vs-encoder reconciliation problem becomes a feature: put "wrist position: 71% confidence" on the overlay. A system that admits uncertainty is trusted more.
+
+### A — judge-side
+Peak-end rule. They remember the highest-intensity moment and the last moment. Design both deliberately. Your USB-A-right-side-up gag is an excellent ending — it's funny, it's humanizing, and it's genuinely hard.
+Give the judge a job. Hand them the jar. Let them struggle with it for three seconds, then let the arm do it. Participation inflates ratings (IKEA effect) and it converts spectators into witnesses.
+Stage a failure and recover. Service recovery paradox: a visible failure followed by a clean recovery rates higher than a flawless run. Also, your Recovery Protocol suddenly has a demo.
+Name your own limitations first. "The deception-signal heuristic is unvalidated and is not a lie detector." Saying that before a judge asks kills the gotcha and reads as maturity. Withholding it and getting caught is a scored disaster.
