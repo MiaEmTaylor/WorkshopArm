@@ -26,3 +26,7 @@ Thumbs.db
 
 # Claude Code local session config
 .claude/
+
+# Secrets and local virtual environments
+.env
+.venv/
