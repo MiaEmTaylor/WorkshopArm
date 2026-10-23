@@ -69,3 +69,4 @@
 - Answered the design questions: 2 cameras, "just talk" voice sample (voiceprint only), handshake grip (ceiling 22 lbs, 3 s release), Signal Fusion priority + confidence, recognition (face + voice), affect (EmoNet → personal calibration)
 - Split Handshake into Puppeteer (boss), Handshake (who) and Learning (feedback)
 - Wrote a basic page for every protocol and updated the protocol architecture
+- Merged the October work into main and cut the `v3.0-october2026` version branch
