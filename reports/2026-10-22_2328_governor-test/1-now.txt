@@ -1,0 +1,14 @@
+8 tests x 10s, plugged in, report -> /home/not-a-moron/WorkshopArm/reports/2026-10-22_2329_the-cake-is-a-lie
+
+[1/8] 1cam_c0_w640                 17.9 FPS
+[2/8] 1cam_c1_w640                 15.0 FPS
+[3/8] 1cam_c2_w640                  6.9 FPS
+[4/8] 1cam_c1_w320                 15.9 FPS
+[5/8] 1cam_c1_w640_face            15.1 FPS
+[6/8] 2cam_seq_c1_w640              8.6 /   8.6 FPS
+[7/8] 2cam_threads_c1_w640         11.3 /  17.0 FPS
+[8/8] 2cam_procs_c1_w640           11.3 /  17.3 FPS
+
+done. report is in reports/2026-10-22_2329_the-cake-is-a-lie/summary.md
+to put it on github:
+  git add reports/2026-10-22_2329_the-cake-is-a-lie && git commit -m 'Add holistic benchmark report' && git push
